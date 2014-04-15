@@ -27,7 +27,11 @@ public class TabletController {
         if (type > 5) type = 1;
 
         status.cpuSpeed = 1500 + quantity * 50 + (type == 1 ? 5 : type == 2 ? 3 : 5);
-        status.freeMemory -= quantity * 50 * type;
+        if (quantity * 50 * type > status.freeMemory) {
+            status.freeMemory = 0;
+        } else {
+            status.freeMemory -= quantity * 50 * type;
+        }
 
         status.isOverloaded = status.cpuSpeed > 3000 || status.freeMemory < 50;
 
