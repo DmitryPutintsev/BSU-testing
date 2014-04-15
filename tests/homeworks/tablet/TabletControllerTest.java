@@ -30,7 +30,6 @@ public class TabletControllerTest {
         controller.startApps(0, -1);
     }
 
-    //    Logic issue
     @Test(expected = IllegalArgumentException.class)
     public void testStartAppsWithNegativeType() throws InvalidOperationException {
         controller.startApps(-1, 0);
@@ -41,7 +40,6 @@ public class TabletControllerTest {
         controller.startApps(0, 0);
     }
 
-    //    Logic issue
     @Test(expected = InvalidOperationException.class)
     public void testStartAppsWithOverloaded() throws InvalidOperationException {
         controller.startTablet();
@@ -51,7 +49,6 @@ public class TabletControllerTest {
         controller.startApps(0,0);
     }
 
-    //    Logic issue
     @Test()
     public void testStartAppsWithNormalData() throws InvalidOperationException {
         controller.startTablet();
