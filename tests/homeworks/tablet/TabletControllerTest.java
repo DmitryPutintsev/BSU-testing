@@ -59,4 +59,15 @@ public class TabletControllerTest {
         assertEquals(false, status.isOverloaded);
     }
 
+    @Test()
+    public void testStartAppsWithOverloadedLogic() throws InvalidOperationException {
+        controller.startTablet();
+        TabletStatus status = controller.getCurrentStatus();
+        status.applications = 100;
+        controller.startApps(1,100);
+        assertEquals(6505, status.cpuSpeed);
+        assertEquals(0, status.freeMemory);
+        assertEquals(true, status.isOverloaded);
+    }
+
 }
