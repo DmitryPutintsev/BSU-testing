@@ -27,17 +27,21 @@ public class TabletControllerTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testStartAppsWithNegativeQuantity() throws InvalidOperationException {
-        controller.startApps(0, -1);
+        controller.startApps(1, -1);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testStartAppsWithNegativeType() throws InvalidOperationException {
-        controller.startApps(-1, 0);
+        controller.startApps(-1, 1);
     }
 
     @Test(expected = InvalidOperationException.class)
     public void testStartAppsWithWrongCPUSpeed() throws InvalidOperationException {
-        controller.startApps(0, 0);
+        controller.startTablet();
+
+        TabletStatus status = controller.getCurrentStatus();
+        status.cpuSpeed = 1;
+        controller.startApps(1,1);
     }
 
     @Test(expected = InvalidOperationException.class)
@@ -46,7 +50,7 @@ public class TabletControllerTest {
 
         TabletStatus status = controller.getCurrentStatus();
         status.isOverloaded = true;
-        controller.startApps(0,0);
+        controller.startApps(1,1);
     }
 
     @Test()

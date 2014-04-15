@@ -17,12 +17,11 @@ public class TabletController {
     }
 
     public TabletStatus startApps(int type, int quantity) throws InvalidOperationException, IllegalArgumentException {
-        if (quantity < 0) throw new IllegalArgumentException();
+        if (quantity <= 0) throw new IllegalArgumentException();
         if (type < 0) throw new IllegalArgumentException();
 
         if (status.cpuSpeed < 10) throw new InvalidOperationException();
         if (status.isOverloaded) throw new InvalidOperationException();
-        if (status.applications < quantity) throw new InvalidOperationException();
 
         if (type > 5) type = 1;
 
@@ -32,6 +31,8 @@ public class TabletController {
         } else {
             status.freeMemory -= quantity * 50 * type;
         }
+
+        status.applications += quantity;
 
         status.isOverloaded = status.cpuSpeed > 3000 || status.freeMemory < 50;
 
